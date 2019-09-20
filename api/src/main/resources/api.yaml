@@ -1,0 +1,148 @@
+openapi: 3.0.1
+info:
+  version: '1.0'
+  title: User service
+servers:
+  - url: '/api/v1/user-service'
+tags:
+  - name: User Management
+    description: Operations with User entities
+paths:
+  /user/{id}:
+    put:
+      tags:
+        - User Management
+        summary: Get Users
+        description: Get all Users
+        operationId: getUsers
+        requestBody:
+          $ref: '#/components/requestBodies/UserRequest'
+        responses:
+          '200':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UserDTO'
+    get:
+      tags:
+        - User Management
+      summary: Get User
+      description: Get User by id
+      operationId: getUserById
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+
+  /user:
+    post:
+      tags:
+        - User Management
+        summary: Get Users
+        description: Get all Users
+        operationId: getUsers
+        requestBody:
+          $ref: '#/components/requestBodies/UserRequest'
+        responses:
+          '200':
+            description: Unexpected error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UserDTO'
+    get:
+      tags:
+        - User Management
+      summary: Get Users
+      description: Get all Users
+      operationId: getUsers
+      responses:
+        '200':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+  /user/{id}/basket:
+    get:
+      tags:
+        - User Management
+      summary: Get Basket
+      description: Get Basket by user
+      operationId: getBasket
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketDTO'
+
+components:
+  requestBodies:
+    CreateUserRequest:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserDTO'
+  parameters:
+    id:
+      name: id
+      in: path
+      description: User ID
+      required: true
+      schema:
+        type: integer
+        format: int32
+      example: 59949
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          description: Unique Identifier of User
+          type: integer
+          format: int32
+          readOnly: true
+        name:
+          description: Name of User.
+          type: string
+          readOnly: true
+          maxLength: 100
+        contact:
+          description: Contact of User.
+          type: string
+          maxLength: 100
+        orders:
+          description: List of orders of User.
+          type: array
+          items:
+            type: integer
+            format: int32
+    BasketDTO:
+      type: object
+      properties:
+        id:
+          description: Unique Identifier of User
+          type: integer
+          format: int32
+          readOnly: true
+        customer_id:
+          description: Unique Identifier of User
+          type: integer
+          format: int32
+          maxLength: 100
+        products:
+          description: List of produts of Basket.
+          type: object
+          additionalProperties:
+            type: integer

@@ -8,21 +8,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "users")
-public class User {
 
-    @Id
-    @GeneratedValue(generator = "increment")
-    private Integer id;
+public class Basket {
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "contact")
-    private String contact;
+    private Integer customer_id;
 }
