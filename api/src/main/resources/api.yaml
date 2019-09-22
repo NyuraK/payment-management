@@ -86,27 +86,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserDTO'
-  /user/{id}/basket:
-    get:
-      tags:
-        - User Management
-      summary: Get Basket
-      description: Get Basket by user
-      operationId: getBasket
-      parameters:
-        - $ref: '#/components/parameters/id'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BasketDTO'
 
 components:
   requestBodies:
     UserRequest:
-      description: Unexpected error
+      description: User request
       content:
         application/json:
           schema:
@@ -145,21 +129,3 @@ components:
           items:
             type: integer
             format: int32
-    BasketDTO:
-      type: object
-      properties:
-        id:
-          description: Unique Identifier of Basket
-          type: integer
-          format: int32
-          readOnly: true
-        customer_id:
-          description: Unique Identifier of User
-          type: integer
-          format: int32
-          maxLength: 100
-        products:
-          description: List of produts of Basket.
-          type: object
-          additionalProperties:
-            type: integer

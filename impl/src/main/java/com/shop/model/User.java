@@ -24,4 +24,15 @@ public class User {
 
     @Column(name = "contact")
     private String contact;
+
+    @Transient
+    private Basket basket;
+
+    public void addProductInBasket(Integer id) {
+        basket.addProduct(id);
+    }
+
+    public void deleteProductFromBasket(Integer id) {
+        basket.deleteProduct(id);
+    }
 }
