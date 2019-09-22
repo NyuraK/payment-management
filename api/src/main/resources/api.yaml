@@ -9,21 +9,6 @@ tags:
     description: Operations with User entities
 paths:
   /user/{id}:
-    put:
-      tags:
-        - User Management
-        summary: Get Users
-        description: Get all Users
-        operationId: getUsers
-        requestBody:
-          $ref: '#/components/requestBodies/UserRequest'
-        responses:
-          '200':
-            description: Unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/UserDTO'
     get:
       tags:
         - User Management
@@ -34,41 +19,73 @@ paths:
         - $ref: '#/components/parameters/id'
       responses:
         '200':
-          description: Unexpected error
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserDTO'
+        '404':
+          description: User not found
+    put:
+      tags:
+        - User Management
+      summary: Add User
+      description: Update User
+      operationId: updateUser
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/UserRequest'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+    delete:
+      tags:
+        - User Management
+      summary: Delete User
+      description: Delete User
+      operationId: delete
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Ok. User succesfully deleted
 
   /user:
     post:
       tags:
         - User Management
-        summary: Get Users
-        description: Get all Users
-        operationId: getUsers
-        requestBody:
-          $ref: '#/components/requestBodies/UserRequest'
-        responses:
-          '200':
-            description: Unexpected error
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/UserDTO'
+      summary: Add Users
+      description: Add User
+      operationId: addUser
+      requestBody:
+        $ref: '#/components/requestBodies/UserRequest'
+      responses:
+        '200':
+          description: Added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
     get:
       tags:
         - User Management
       summary: Get Users
       description: Get all Users
-      operationId: getUsers
+      operationId: getAllUsers
       responses:
         '200':
-          description: Unexpected error
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserDTO'
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDTO'
   /user/{id}/basket:
     get:
       tags:
@@ -80,7 +97,7 @@ paths:
         - $ref: '#/components/parameters/id'
       responses:
         '200':
-          description: Unexpected error
+          description: OK
           content:
             application/json:
               schema:
@@ -88,7 +105,7 @@ paths:
 
 components:
   requestBodies:
-    CreateUserRequest:
+    UserRequest:
       description: Unexpected error
       content:
         application/json:
@@ -132,7 +149,7 @@ components:
       type: object
       properties:
         id:
-          description: Unique Identifier of User
+          description: Unique Identifier of Basket
           type: integer
           format: int32
           readOnly: true

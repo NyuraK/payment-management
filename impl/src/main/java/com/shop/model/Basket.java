@@ -16,4 +16,6 @@ import javax.persistence.*;
 public class Basket {
 
     private Integer customer_id;
+
+
 }
