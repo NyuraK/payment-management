@@ -11,7 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class UserService {
     private UserRepository repository;
     public User getUser(int id) {
@@ -24,6 +27,7 @@ public class UserService {
     }
 
     public UserDTO getUser(Integer id) {
+        log.info("Get user by id {}", id);
         User user = repository.findById(id).orElse(null);
         return convertToDTO(user);
     }
@@ -45,16 +49,19 @@ public class UserService {
     }
 
     public List<UserDTO> getAllUsers() {
+        log.info("Get all users");
         return StreamSupport.stream(repository.findAll().spliterator(), false)
                 .map(this::convertToDTO).collect(Collectors.toList());
     }
 
     public UserDTO createUser(UserDTO userDTO) {
+        log.info("Create new user");
         User user = convertToEntity(userDTO);
         return convertToDTO(repository.save(user));
     }
 
     public UserDTO updateUser(UserDTO userDTO) {
+        log.info("Update yser with id {}", userDTO.getId());
         User user = repository.findById(userDTO.getId()).orElse(null);
         if (user == null) throw new UserNotFoundException(userDTO.getId());
         user = convertToEntity(userDTO);
@@ -63,6 +70,7 @@ public class UserService {
     }
 
     public void deleteUser(Integer id) {
+        log.info("Delete user with id {}", id);
         User user = repository.findById(id).orElse(null);
         if (user == null) throw new UserNotFoundException(id);
         repository.delete(user);

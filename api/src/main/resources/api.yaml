@@ -59,7 +59,7 @@ paths:
     post:
       tags:
         - User Management
-      summary: Add Users
+      summary: Add User
       description: Add User
       operationId: addUser
       requestBody:
@@ -127,5 +127,4 @@ components:
           description: List of orders of User.
           type: array
           items:
-            type: integer
-            format: int32
+            type: string
