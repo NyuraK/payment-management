@@ -8,12 +8,12 @@ tags:
   - name: Payment Management
     description: Operations with Payment entities
 paths:
-  /payment/{id}:
+  /payments/{id}:
     post:
       tags:
         - Payment Management
       summary: Pay order
-      description: Pay order by id
+      description: Pay order by
       operationId: pay
       parameters:
         - $ref: '#/components/parameters/id'
@@ -30,7 +30,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentDto'
-  /payment/:
+  /payments/:
     get:
       tags:
         - Payment Management
