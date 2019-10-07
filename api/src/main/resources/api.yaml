@@ -3,7 +3,7 @@ info:
   version: '1.0'
   title: Payment service
 servers:
-  - url: '/api/v1/payment-service'
+  - url: '/payment-service/api/v1'
 tags:
   - name: Payment Management
     description: Operations with Payment entities
