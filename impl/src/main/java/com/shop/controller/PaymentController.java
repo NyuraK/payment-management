@@ -22,8 +22,8 @@ public class PaymentController implements PaymentManagementApi {
     }
 
     @Override
-    public ResponseEntity<PaymentDto> pay(String id, OrderDto orderDto) {
-        return ResponseEntity.ok(service.pay(orderDto));
+    public ResponseEntity<PaymentDto> pay(OrderDto order) {
+        return ResponseEntity.ok(service.pay(order));
     }
 
     @Override
