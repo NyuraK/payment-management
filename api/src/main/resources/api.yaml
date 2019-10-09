@@ -8,7 +8,7 @@ tags:
   - name: Payment Management
     description: Operations with Payment entities
 paths:
-  /payment/{id}:
+  /payments/{id}:
     post:
       tags:
         - Payment Management
@@ -30,7 +30,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentDto'
-  /payment/:
+  /payments:
     get:
       tags:
         - Payment Management
