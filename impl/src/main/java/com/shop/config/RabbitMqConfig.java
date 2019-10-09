@@ -42,9 +42,7 @@ public class RabbitMqConfig {
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
-        rabbitTemplate.setQueue(queue);
         rabbitTemplate.setExchange(topicExchange);
-        rabbitTemplate.setRoutingKey(routingKey);
         return rabbitTemplate;
     }
 
