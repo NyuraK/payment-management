@@ -13,7 +13,7 @@ paths:
       tags:
         - Payment Management
       summary: Pay order
-      description: Pay order by id
+      description: Pay order by
       operationId: pay
       parameters:
         - $ref: '#/components/parameters/id'
