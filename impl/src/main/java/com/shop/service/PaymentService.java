@@ -37,8 +37,8 @@ public class PaymentService {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.id(payment.getId());
         paymentDto.customerId(payment.getCustomerId());
-        paymentDto.orderId(payment.getOrderId());
-        paymentDto.total(payment.getTotal());
+        paymentDto.getOrderId(payment.getOrderId());
+        paymentDto.getTotal(payment.getTotal());
         return paymentDto;
     }
 

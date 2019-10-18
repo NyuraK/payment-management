@@ -14,6 +14,7 @@
     </modules>
     <properties>
         <java.version>1.8</java.version>
+        <rabbirmq.version>2.0.9.RELEASE</rabbirmq.version>
     </properties>
 
     <build>

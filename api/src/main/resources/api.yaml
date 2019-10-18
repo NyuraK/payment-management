@@ -30,7 +30,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentDto'
-  /payments:
+  /payments/:
     get:
       tags:
         - Payment Management
