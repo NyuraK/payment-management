@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @Api(tags = "Payment management")
@@ -22,7 +23,8 @@ public class PaymentController implements PaymentManagementApi {
     }
 
     @Override
-    public ResponseEntity<PaymentDto> pay(String id, OrderDto orderDto) {
+    public ResponseEntity<PaymentDto> pay(OrderDto orderDto) {
+        Objects.requireNonNull(orderDto);
         return ResponseEntity.ok(service.pay(orderDto));
     }
 
