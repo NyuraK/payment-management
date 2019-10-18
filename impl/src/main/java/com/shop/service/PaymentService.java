@@ -28,7 +28,6 @@ public class PaymentService {
         Payment payment = new Payment();
         payment.setCustomerId(order.getCustomerId());
         payment.setOrderId(order.getId());
-        payment.setTotal(order.getTotal());
         payment.setStatus(Status.OK);
         return convertToDTO(payment);
     }
@@ -37,8 +36,7 @@ public class PaymentService {
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.id(payment.getId());
         paymentDto.customerId(payment.getCustomerId());
-        paymentDto.getOrderId(payment.getOrderId());
-        paymentDto.getTotal(payment.getTotal());
+        paymentDto.setOrderId(payment.getOrderId());
         return paymentDto;
     }
 

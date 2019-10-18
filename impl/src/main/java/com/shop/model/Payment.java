@@ -28,9 +28,6 @@ public class Payment {
     private String customerId;
 
     @Column
-    private Double total;
-
-    @Column
     private Status status;
 
     @Column

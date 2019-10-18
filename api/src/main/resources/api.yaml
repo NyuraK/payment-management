@@ -3,20 +3,18 @@ info:
   version: '1.0'
   title: Payment service
 servers:
-  - url: '/api/v1/payment-service'
+  - url: '/payment-service/api/v1'
 tags:
   - name: Payment Management
     description: Operations with Payment entities
 paths:
-  /payments/{id}:
+  /payments:
     post:
       tags:
         - Payment Management
       summary: Pay order
       description: Pay order by
       operationId: pay
-      parameters:
-        - $ref: '#/components/parameters/id'
       requestBody:
         description: order
         content:
@@ -30,7 +28,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaymentDto'
-  /payments/:
     get:
       tags:
         - Payment Management
@@ -127,3 +124,19 @@ components:
       type: string
     OrderStatus:
       type: string
+
+    PaidOrderMessage:
+      type: object
+      properties:
+        orderId:
+          type: string
+        paymentId:
+          type: integer
+
+    PaidProductMessage:
+      type: object
+      properties:
+        products:
+          type: string
+          additionalProperties:
+            type: integer
