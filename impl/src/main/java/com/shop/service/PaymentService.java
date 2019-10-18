@@ -4,7 +4,6 @@ import com.shop.api.swagger.models.OrderDto;
 import com.shop.api.swagger.models.PaymentDto;
 import com.shop.api.swagger.models.PaymentType;
 import com.shop.api.swagger.models.Status;
-import com.shop.client.OrderServiceSender;
 import com.shop.model.Payment;
 import com.shop.repository.PaymentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +18,10 @@ import java.util.stream.StreamSupport;
 @Slf4j
 public class PaymentService {
     private PaymentRepository repository;
-    private OrderServiceSender sender;
 
     @Autowired
-    public PaymentService(PaymentRepository repository, OrderServiceSender sender) {
+    public PaymentService(PaymentRepository repository) {
         this.repository = repository;
-        this.sender = sender;
     }
 
     public PaymentDto pay(OrderDto order) {
@@ -34,7 +31,6 @@ public class PaymentService {
         payment.setStatus(Status.OK);
         payment.setPaymentType(PaymentType.CARD_ONLINE);
         repository.save(payment);
-        sender.sendMessage(order.getId(), payment.getId());
         return convertToDTO(payment);
     }
 
