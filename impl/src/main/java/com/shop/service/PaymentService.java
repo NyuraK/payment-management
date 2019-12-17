@@ -38,7 +38,13 @@ public class PaymentService {
         log.debug("Received total {}", total);
         repository.save(payment);
         orderSender.sendMessage(order.getId(), payment.getId());
-        return convertToDTO(payment);
+        return withTotal(payment, total);
+    }
+
+    private PaymentDto withTotal(Payment payment, Double total) {
+        PaymentDto paymentDto = convertToDTO(payment);
+        paymentDto.setTotal(total);
+        return paymentDto;
     }
 
     private PaymentDto convertToDTO(Payment payment) {
