@@ -7,10 +7,9 @@ import com.shop.client.OrderServiceClient;
 import com.shop.client.OrderServiceSender;
 import com.shop.model.Payment;
 import com.shop.repository.PaymentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,21 +19,25 @@ import java.util.stream.StreamSupport;
 @Slf4j
 public class PaymentService {
     private PaymentRepository repository;
+    private OrderServiceClient client;
     private OrderServiceSender orderSender;
 
     @Autowired
-    public PaymentService(PaymentRepository repository, OrderServiceSender orderServiceSender) {
+    public PaymentService(PaymentRepository repository, OrderServiceClient client, OrderServiceSender orderServiceSender) {
         this.repository = repository;
+        this.client = client;
         this.orderSender = orderServiceSender;
     }
 
     public PaymentDto pay(OrderDto order) {
         Payment payment = new Payment();
+        Double total = client.getTotalAmount(order.getId());
         payment.setCustomerId(order.getCustomerId());
         payment.setOrderId(order.getId());
         payment.setStatus(Status.OK);
+        log.debug("Received total {}", total);
         repository.save(payment);
-        this.orderSender.sendMessage(order.getId(), payment.getId());
+        orderSender.sendMessage(order.getId(), payment.getId());
         return convertToDTO(payment);
     }
 

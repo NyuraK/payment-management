@@ -1,19 +1,12 @@
 package com.shop.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-public class OrderServiceClient {
-    private RestTemplate restTemplate;
-
-    @Autowired
-    public OrderServiceClient(RestTemplate restTemplate) {
-
-    }
-
-    public void getTotalAmount(String id) {
-        ResponseEntity<Double> response = restTemplate.getForEntity("http://localhost:8085/orderManagement/orders/"
-                + id + "/total", Double.class);
-    }
+@FeignClient("order-management")
+public interface OrderServiceClient {
+    @RequestMapping(method = RequestMethod.GET, value = "/orders/{id}/total")
+    Double getTotalAmount(@PathVariable String id);
 }

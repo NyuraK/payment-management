@@ -114,12 +114,8 @@ components:
         paymentId:
           type: integer
       required:
-        - name
         - customerId
-        - total
-        - shippingType
-        - status
-        - products
+        - id
     ShippingType:
       type: string
     OrderStatus:

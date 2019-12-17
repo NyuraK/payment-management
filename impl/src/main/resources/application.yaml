@@ -1,0 +1,51 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: payment-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/usermanagement?useUnicode=true&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: root
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+#logging
+logging:
+  level:
+    com.shop: debug
+    org.springframework: info
+#rabbitmq
+rabbitmq:
+  order:
+    topic: payment
+    queue: paid-orders
+    routingKey: pay
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${REGISTRY_HOST:localhost}:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    preferIpAddress: true
+
+feign:
+  hystrix:
+    enabled: true
+
+---
+# Docker profile
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:mysql://mysqldb:3306/paymentmanagement?useUnicode=true&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate.ddl-auto: update

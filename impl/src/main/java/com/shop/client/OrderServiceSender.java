@@ -27,7 +27,6 @@ public class OrderServiceSender {
     public void sendMessage(String orderId, Integer paymentId) {
         PaidOrderMessage data = new PaidOrderMessage().orderId(orderId).paymentId(paymentId);
         log.info("Sending message to the queue using routingKey {}. Message= {}", rabbitTemplate.getRoutingKey(), data);
-        rabbitTemplate.setQueue(queue);
         rabbitTemplate.setRoutingKey(routingKey);
         rabbitTemplate.convertAndSend(data);
         log.info("The message has been sent to the queue.");

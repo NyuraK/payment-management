@@ -4,6 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.1.RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <groupId>com.online-shop</groupId>
     <artifactId>user-management</artifactId>
     <packaging>pom</packaging>
@@ -14,7 +21,8 @@
     </modules>
     <properties>
         <java.version>1.8</java.version>
-        <rabbirmq.version>2.0.9.RELEASE</rabbirmq.version>
+        <rabbirmq.version>2.1.1.RELEASE</rabbirmq.version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
     </properties>
 
     <build>
